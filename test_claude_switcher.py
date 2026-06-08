@@ -336,9 +336,10 @@ def test_load_profiles_invalid_falls_back(tmp_path):
     target = tmp_path / "profiles.json"
     target.write_text("{not json", encoding="utf-8")
     out = cs.load_profiles(str(target))           # must not raise
-    assert len(out) == 3
-    # bad file gets rewritten with the valid generic default
-    assert cs._valid_profile_list(json.loads(target.read_text()))
+    assert len(out) == 3                          # generic default used in memory
+    # an existing-but-invalid file is PRESERVED, never clobbered (no data loss on
+    # a hand-edit typo) — only a *missing* file is created.
+    assert target.read_text(encoding="utf-8") == "{not json"
 
 
 if __name__ == "__main__":

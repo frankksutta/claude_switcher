@@ -187,24 +187,28 @@ def _valid_profile_list(data):
 def load_profiles(path=PROFILES_FILE):
     """Load account profiles from JSON, expanding ~ in each config_dir.
 
-    On a missing or invalid file, writes GENERIC_DEFAULT_PROFILES to `path` and
-    returns those. Never raises — any read error falls back to the generic
-    default. config_dir is stored with ~ in JSON and expanded here.
+    On a MISSING file, writes GENERIC_DEFAULT_PROFILES to `path` and returns
+    those. On an existing-but-invalid file (bad JSON / wrong shape), returns the
+    generic default in memory but leaves the file UNTOUCHED — so a hand-edit typo
+    doesn't silently destroy the user's accounts. Never raises. config_dir is
+    stored with ~ in JSON and expanded here.
     """
     raw = None
+    file_exists = os.path.isfile(path)
     try:
-        if os.path.isfile(path):
+        if file_exists:
             with open(path, "r", encoding="utf-8") as f:
                 raw = json.load(f)
     except Exception:
         raw = None
     if not _valid_profile_list(raw):
         raw = [dict(p) for p in GENERIC_DEFAULT_PROFILES]
-        try:
-            with open(path, "w", encoding="utf-8") as f:
-                json.dump(raw, f, indent=2)
-        except Exception:
-            pass
+        if not file_exists:   # only create when absent; never clobber a bad edit
+            try:
+                with open(path, "w", encoding="utf-8") as f:
+                    json.dump(raw, f, indent=2)
+            except Exception:
+                pass
     profiles = []
     for p in raw:
         q = dict(p)
