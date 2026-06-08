@@ -1,0 +1,45 @@
+[
+  {
+    "label": "Account 1 (Team)",
+    "tag": "TEAM-1",
+    "color": "#00c8ff",
+    "config_dir": "~/.claude-team1",
+    "mode": "claude",
+    "env_set": {},
+    "env_remove": [
+      "CLAUDE_CODE_USE_BEDROCK",
+      "CLAUDE_CODE_USE_VERTEX",
+      "ANTHROPIC_API_KEY",
+      "ANTHROPIC_AUTH_TOKEN",
+      "ANTHROPIC_BASE_URL",
+      "ANTHROPIC_MODEL"
+    ]
+  },
+  {
+    "label": "Account 2 (Team)",
+    "tag": "TEAM-2",
+    "color": "#b87fff",
+    "config_dir": "~/.claude-team2",
+    "mode": "claude",
+    "env_set": {},
+    "env_remove": [
+      "CLAUDE_CODE_USE_BEDROCK",
+      "CLAUDE_CODE_USE_VERTEX",
+      "ANTHROPIC_API_KEY",
+      "ANTHROPIC_AUTH_TOKEN",
+      "ANTHROPIC_BASE_URL",
+      "ANTHROPIC_MODEL"
+    ]
+  },
+  {
+    "label": "AWS Bedrock",
+    "tag": "BEDROCK",
+    "color": "#ff9f43",
+    "config_dir": "~/.claude",
+    "mode": "bedrock",
+    "env_set": {
+      "CLAUDE_CODE_USE_BEDROCK": "1"
+    },
+    "env_remove": []
+  }
+]

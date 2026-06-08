@@ -1,0 +1,22 @@
+# .gitignore
+# Add patterns here to exclude files from git.
+# Examples:
+# *.exe
+# *.lnk
+# build/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# git-auto-gui per-project settings
+.git-auto-gui.json
+
+# claude_switcher runtime state (machine-specific)
+claude_switcher_prefs.json
+
+# personal account/team profiles (real emails / config dirs) — not for publishing.
+# Ship claude_switcher_profiles.example.json instead; the app generates this file
+# from the generic default on first run.
+claude_switcher_profiles.json
